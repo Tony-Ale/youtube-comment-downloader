@@ -6,6 +6,7 @@ import sys
 import time
 
 from .downloader import YoutubeCommentDownloader, SORT_BY_POPULAR, SORT_BY_RECENT
+from .async_downloader import AsyncYoutubeCommentDownloader, SORT_BY_POPULAR, SORT_BY_RECENT
 
 INDENT = 4
 
@@ -49,7 +50,7 @@ def main(argv = None):
                 os.makedirs(outdir)
 
         print('Downloading Youtube comments for', youtube_id or youtube_url)
-        downloader = YoutubeCommentDownloader()
+        downloader = AsyncYoutubeCommentDownloader()
         generator = (
             downloader.get_comments(youtube_id, args.sort, args.language)
             if youtube_id
